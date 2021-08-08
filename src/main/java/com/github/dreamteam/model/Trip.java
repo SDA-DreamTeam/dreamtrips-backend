@@ -9,15 +9,19 @@ public class Trip {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private String id;
+
     @ManyToOne
-    @JoinColumn(name="AIRPORT_ID", nullable=false, updatable=false)
+    @JoinColumn(name="FROM_AIRPORT_ID", nullable=false, updatable=false, insertable = false)
     private Airport fromAirport;
+
     @ManyToOne
-    @JoinColumn(name="AIRPORT_ID", nullable=false, updatable=false)
+    @JoinColumn(name="TO_AIRPORT_ID", nullable=false, updatable=false, insertable = false)
     private Airport toAirport;
+
     @ManyToOne
     @JoinColumn(name="HOTEL_ID", nullable=false, updatable=false)
     private Hotel hotel;
+
     private Date departureDate;
     private int numberOfDays;
     private String type;

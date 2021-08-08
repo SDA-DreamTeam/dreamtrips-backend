@@ -7,18 +7,21 @@ import javax.persistence.*;
 public class Hotel {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private String id;
+    private long id;
+
     private String name;
+
     @ManyToOne
     @JoinColumn(name="CITY_ID", nullable=false, updatable=false)
     private City city;
+
     private String description;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
