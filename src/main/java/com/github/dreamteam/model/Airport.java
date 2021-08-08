@@ -9,6 +9,7 @@ public class Airport {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private String id;
     private String name;
+
     @ManyToOne
     @JoinColumn(name="CITY_ID", nullable=false, updatable=false)
     private City city;
