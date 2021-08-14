@@ -15,7 +15,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City getCityById(long cityId) throws ObjectNotFoundException {
-        return cityRepository.findById(cityId).orElseThrow(()->new ObjectNotFoundException("Unable to find such airport "+cityId));
+        return cityRepository.findById(cityId).orElseThrow(()->new ObjectNotFoundException("Unable to find such city "+cityId));
     }
 
     @Override

@@ -17,7 +17,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Hotel getHotelById(long hotelId) {
         return hotelRepository.findById(hotelId)
-                .orElseThrow(() -> new NotFoundException("Unable to find such airport " + hotelId));
+                .orElseThrow(() -> new NotFoundException("Unable to find such hotel " + hotelId));
     }
 
     @Override

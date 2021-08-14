@@ -15,7 +15,7 @@ public class CountryServiceImpl implements CountryService{
 
     @Override
     public Country getCountryById(long countryId) throws ObjectNotFoundException {
-        return countryRepository.findById(countryId).orElseThrow(()->new ObjectNotFoundException("Unable to find such airport "+countryId));
+        return countryRepository.findById(countryId).orElseThrow(()->new ObjectNotFoundException("Unable to find such country "+countryId));
     }
 
     @Override

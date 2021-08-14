@@ -8,7 +8,7 @@ import java.util.Date;
 public class Trip {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private String id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name="FROM_AIRPORT_ID", nullable=false, updatable=false, insertable = false)
@@ -30,11 +30,11 @@ public class Trip {
     private int numberOfBedsAdult;
     private int numberOfBedsChild;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

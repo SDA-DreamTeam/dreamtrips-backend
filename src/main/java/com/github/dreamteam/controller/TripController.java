@@ -1,7 +1,9 @@
 package com.github.dreamteam.controller;
 
 import com.github.dreamteam.model.Hotel;
+import com.github.dreamteam.model.Trip;
 import com.github.dreamteam.service.hotel.HotelService;
+import com.github.dreamteam.service.trip.TripService;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,20 +11,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/hotels")
-public class HotelController {
-
+@RequestMapping("/trips")
+public class TripController {
     @Autowired
-    private HotelService hotelService;
+    private TripService tripService;
 
     @GetMapping
     public @ResponseBody
-    List<Hotel> getAllHotels(){
-        return hotelService.getAllHotels();
+    List<Trip> getAllTrips(){
+        return tripService.getAllTrips();
     }
 
     @GetMapping("/{idCode}")
-    public @ResponseBody Hotel getHotelById(@PathVariable("idCode") long idCode) throws ObjectNotFoundException {
-        return hotelService.getHotelById(idCode);
+    public @ResponseBody Trip getTripById(@PathVariable("idCode") long idCode) throws ObjectNotFoundException {
+        return tripService.getTripById(idCode);
     }
 }
