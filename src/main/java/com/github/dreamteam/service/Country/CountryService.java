@@ -8,6 +8,7 @@ import java.util.List;
 public interface CountryService {
 
     Country getCountryById(long id) throws ObjectNotFoundException;
+
     List<Country> getAllCountries();
 
 }

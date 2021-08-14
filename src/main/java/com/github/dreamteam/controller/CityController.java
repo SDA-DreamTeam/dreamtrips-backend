@@ -1,23 +1,31 @@
 package com.github.dreamteam.controller;
 
 import com.github.dreamteam.model.City;
+import com.github.dreamteam.model.Country;
 import com.github.dreamteam.repository.CityRepository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.github.dreamteam.service.City.CityService;
+import com.github.dreamteam.service.Country.CountryService;
+import javassist.tools.rmi.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/cities")
 public class CityController {
 
-    private final CityRepository cityRepository;
+    @Autowired
+    private CityService cityService;
 
-    public CityController(CityRepository cityRepository) {
-        this.cityRepository = cityRepository;
+    @GetMapping
+    public @ResponseBody
+    List<City> getAllCities(){
+        return cityService.getAllCities();
     }
 
-    @RequestMapping(value = "/city")
-    public List<City> findAll() {
-        return cityRepository.findAll();
+    @GetMapping("/{idCode}")
+    public @ResponseBody City getCityById(@PathVariable("idCode") long idCode) throws ObjectNotFoundException {
+        return cityService.getCityById(idCode);
     }
 }
