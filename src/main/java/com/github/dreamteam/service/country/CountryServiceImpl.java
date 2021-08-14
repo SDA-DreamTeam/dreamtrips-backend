@@ -1,8 +1,6 @@
-package com.github.dreamteam.service.Country;
+package com.github.dreamteam.service.country;
 
-import com.github.dreamteam.model.Airport;
 import com.github.dreamteam.model.Country;
-import com.github.dreamteam.repository.AirportRepository;
 import com.github.dreamteam.repository.CountryRepository;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

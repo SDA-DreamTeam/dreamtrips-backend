@@ -1,8 +1,7 @@
-package com.github.dreamteam.service.Airport;
+package com.github.dreamteam.service.airport;
 
 import com.github.dreamteam.model.Airport;
 import com.github.dreamteam.repository.AirportRepository;
-import com.github.dreamteam.service.Airport.AirportService;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

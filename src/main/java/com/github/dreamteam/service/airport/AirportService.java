@@ -1,4 +1,4 @@
-package com.github.dreamteam.service.Airport;
+package com.github.dreamteam.service.airport;
 
 import com.github.dreamteam.model.Airport;
 import javassist.tools.rmi.ObjectNotFoundException;

@@ -1,9 +1,7 @@
 package com.github.dreamteam.controller;
 
-import com.github.dreamteam.model.Airport;
 import com.github.dreamteam.model.Country;
-import com.github.dreamteam.service.Airport.AirportService;
-import com.github.dreamteam.service.Country.CountryService;
+import com.github.dreamteam.service.country.CountryService;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

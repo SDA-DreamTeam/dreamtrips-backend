@@ -1,9 +1,7 @@
-package com.github.dreamteam.service.City;
+package com.github.dreamteam.service.city;
 
 import com.github.dreamteam.model.City;
-import com.github.dreamteam.model.Country;
 import com.github.dreamteam.repository.CityRepository;
-import com.github.dreamteam.repository.CountryRepository;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

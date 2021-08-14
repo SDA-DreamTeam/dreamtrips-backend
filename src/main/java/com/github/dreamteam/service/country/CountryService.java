@@ -1,8 +1,7 @@
-package com.github.dreamteam.service.Country;
+package com.github.dreamteam.service.country;
 
 import com.github.dreamteam.model.Country;
 import javassist.tools.rmi.ObjectNotFoundException;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

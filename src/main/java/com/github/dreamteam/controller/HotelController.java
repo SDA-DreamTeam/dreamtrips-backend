@@ -1,9 +1,7 @@
 package com.github.dreamteam.controller;
 
-import com.github.dreamteam.model.Country;
 import com.github.dreamteam.model.Hotel;
-import com.github.dreamteam.service.Country.CountryService;
-import com.github.dreamteam.service.Hotel.HotelService;
+import com.github.dreamteam.service.hotel.HotelService;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

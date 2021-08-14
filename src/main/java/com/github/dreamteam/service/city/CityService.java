@@ -1,7 +1,6 @@
-package com.github.dreamteam.service.City;
+package com.github.dreamteam.service.city;
 
 import com.github.dreamteam.model.City;
-import com.github.dreamteam.model.Country;
 import javassist.tools.rmi.ObjectNotFoundException;
 
 import java.util.List;

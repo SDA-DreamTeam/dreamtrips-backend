@@ -2,8 +2,6 @@ package com.github.dreamteam.integration;
 
 import com.github.dreamteam.integration.misc.DatabaseCleaner;
 import com.github.dreamteam.model.Country;
-import com.github.dreamteam.repository.AirportRepository;
-import com.github.dreamteam.repository.CityRepository;
 import com.github.dreamteam.repository.CountryRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,23 +19,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-public class CountryIntegrationTest {
+
+public class CountryIntegrationTest extends AbstractTest{
 
     @Autowired
     private MockMvc mvc;
 
     @Autowired
     private CountryRepository countryRepository;
-
-    @Autowired
-    private CityRepository cityRepository;
-
-    @Autowired
-    private AirportRepository airportRepository;
 
     @Autowired
     private DatabaseCleaner databaseCleaner;

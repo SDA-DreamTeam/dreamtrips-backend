@@ -1,10 +1,7 @@
 package com.github.dreamteam.controller;
 
 import com.github.dreamteam.model.City;
-import com.github.dreamteam.model.Country;
-import com.github.dreamteam.repository.CityRepository;
-import com.github.dreamteam.service.City.CityService;
-import com.github.dreamteam.service.Country.CountryService;
+import com.github.dreamteam.service.city.CityService;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
