@@ -5,13 +5,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "airport")
 public class Airport {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="CITY_ID", nullable=false, updatable=false)
+    @JoinColumn(name = "CITY_ID", nullable = false, updatable = false)
     private City city;
 
     public long getId() {

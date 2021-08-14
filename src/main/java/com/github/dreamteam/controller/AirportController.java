@@ -16,7 +16,8 @@ public class AirportController {
     private AirportService airportService;
 
     @GetMapping
-    public @ResponseBody List<Airport> getAllAirports(){
+    @ResponseBody
+    public List<Airport> getAllAirports(){
         return airportService.getAllAirports();
     }
 

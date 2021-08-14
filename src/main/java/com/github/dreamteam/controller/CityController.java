@@ -16,8 +16,8 @@ public class CityController {
     private CityService cityService;
 
     @GetMapping
-    public @ResponseBody
-    List<City> getAllCities(){
+    @ResponseBody
+    public List<City> getAllCities(){
         return cityService.getAllCities();
     }
 

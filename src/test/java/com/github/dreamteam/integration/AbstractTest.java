@@ -1,9 +1,6 @@
 package com.github.dreamteam.integration;
 
-import com.github.dreamteam.integration.action.AddAirportAction;
-import com.github.dreamteam.integration.action.AddCityAction;
-import com.github.dreamteam.integration.action.AddCountryAction;
-import com.github.dreamteam.integration.action.AddHotelAction;
+import com.github.dreamteam.integration.action.*;
 import com.github.dreamteam.integration.misc.DatabaseCleaner;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -19,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class AbstractTest {
+public abstract class AbstractTest {
 
     @Autowired
     protected MockMvc mvc;
@@ -35,6 +32,9 @@ public class AbstractTest {
 
     @Autowired
     protected ObjectProvider<AddAirportAction> addAirportActionProvider;
+
+    @Autowired
+    protected  ObjectProvider<AddTripAction> addTripActionProvider;
 
     @Autowired
     private DatabaseCleaner databaseCleaner;

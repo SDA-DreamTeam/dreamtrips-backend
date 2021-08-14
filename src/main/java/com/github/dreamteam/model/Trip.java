@@ -1,32 +1,33 @@
 package com.github.dreamteam.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "trip")
 public class Trip {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @ManyToOne
-    @JoinColumn(name="FROM_AIRPORT_ID", nullable=false, updatable=false, insertable = false)
+    @JoinColumn(name = "FROM_AIRPORT_ID", nullable = false, updatable = false)
     private Airport fromAirport;
 
     @ManyToOne
-    @JoinColumn(name="TO_AIRPORT_ID", nullable=false, updatable=false, insertable = false)
+    @JoinColumn(name = "TO_AIRPORT_ID", nullable = false, updatable = false)
     private Airport toAirport;
 
     @ManyToOne
-    @JoinColumn(name="HOTEL_ID", nullable=false, updatable=false)
+    @JoinColumn(name = "HOTEL_ID", nullable = false, updatable = false)
     private Hotel hotel;
 
-    private Date departureDate;
+    private LocalDate departureDate;
     private int numberOfDays;
-    private String type;
-    private double priceAdult;
-    private double priceChild;
+    private BoardBasis type;
+    private BigDecimal priceAdult;
+    private BigDecimal priceChild;
     private int numberOfBedsAdult;
     private int numberOfBedsChild;
 
@@ -62,11 +63,11 @@ public class Trip {
         this.hotel = hotel;
     }
 
-    public Date getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
     }
 
@@ -78,27 +79,27 @@ public class Trip {
         this.numberOfDays = numberOfDays;
     }
 
-    public String getType() {
+    public BoardBasis getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(BoardBasis type) {
         this.type = type;
     }
 
-    public double getPriceAdult() {
+    public BigDecimal getPriceAdult() {
         return priceAdult;
     }
 
-    public void setPriceAdult(double priceAdult) {
+    public void setPriceAdult(BigDecimal priceAdult) {
         this.priceAdult = priceAdult;
     }
 
-    public double getPriceChild() {
+    public BigDecimal getPriceChild() {
         return priceChild;
     }
 
-    public void setPriceChild(double priceChild) {
+    public void setPriceChild(BigDecimal priceChild) {
         this.priceChild = priceChild;
     }
 
