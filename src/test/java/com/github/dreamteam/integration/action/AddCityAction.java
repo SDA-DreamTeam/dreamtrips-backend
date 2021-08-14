@@ -3,7 +3,6 @@ package com.github.dreamteam.integration.action;
 import com.github.dreamteam.model.City;
 import com.github.dreamteam.model.Country;
 import com.github.dreamteam.repository.CityRepository;
-import com.github.dreamteam.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;

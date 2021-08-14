@@ -18,6 +18,7 @@ public class DatabaseCleaner {
     @Autowired
     private HotelRepository hotelRepository;
 
+
     public void clean() {
         airportRepository.deleteAll();
         hotelRepository.deleteAll();

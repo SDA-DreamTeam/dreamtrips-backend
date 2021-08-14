@@ -1,5 +1,6 @@
 package com.github.dreamteam.integration;
 
+import com.github.dreamteam.integration.action.AddAirportAction;
 import com.github.dreamteam.integration.action.AddCityAction;
 import com.github.dreamteam.integration.action.AddCountryAction;
 import com.github.dreamteam.integration.action.AddHotelAction;
@@ -30,7 +31,10 @@ public class AbstractTest {
     protected ObjectProvider<AddCityAction> addCityActionProvider;
 
     @Autowired
-    protected  ObjectProvider<AddHotelAction> addHotelActionProvider;
+    protected ObjectProvider<AddHotelAction> addHotelActionProvider;
+
+    @Autowired
+    protected ObjectProvider<AddAirportAction> addAirportActionProvider;
 
     @Autowired
     private DatabaseCleaner databaseCleaner;

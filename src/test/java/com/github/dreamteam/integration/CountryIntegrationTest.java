@@ -22,37 +22,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class CountryIntegrationTest extends AbstractTest{
 
-    @Autowired
-    private MockMvc mvc;
-
-    @Autowired
-    private CountryRepository countryRepository;
-
-    @Autowired
-    private DatabaseCleaner databaseCleaner;
-
-    @Before
-    public void setUp() {
-        databaseCleaner.clean();
-    }
 
 
     @Test
     public void get_country_by_id() throws Exception {
         // given
-        Country country = new Country();
-        country.setName("Estonia");
-        country = countryRepository.save(country);
+        Country randomCountry = addCountryActionProvider.getObject().execute();
 
         // when
         ResultActions resultActions = mvc.perform(
-                get("/countries/" + country.getId())
+                get("/countries/" + randomCountry.getId())
         );
 
         // then
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("id", is(country.getId()), Long.class))
-                .andExpect(jsonPath("name", is(country.getName())));
+                .andExpect(jsonPath("id", is(randomCountry.getId()), Long.class))
+                .andExpect(jsonPath("name", is(randomCountry.getName())));
     }
 }

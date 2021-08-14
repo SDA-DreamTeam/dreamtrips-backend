@@ -23,52 +23,27 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-public class CityIntegrationTest {
-    @Autowired
-    private MockMvc mvc;
 
-    @Autowired
-    private AirportRepository airportRepository;
+public class CityIntegrationTest extends AbstractTest {
 
-    @Autowired
-    private CityRepository cityRepository;
-
-    @Autowired
-    private CountryRepository countryRepository;
-    @Autowired
-    private DatabaseCleaner databaseCleaner;
-
-    @Before
-    public void setUp() {
-        databaseCleaner.clean();
-    }
     @Test
     public void get_city_by_id() throws Exception {
         // given
-        Country country = new Country();
-        country.setName("Estonia");
-        country = countryRepository.save(country);
+        Country randomCountry = addCountryActionProvider.getObject().execute();
 
-        City city = new City();
-        city.setCountry(country);
-        city.setName("Tallinn");
-        city = cityRepository.save(city);
+        City randomCity = addCityActionProvider.getObject().setCountry(randomCountry).execute();
 
         // when
         ResultActions resultActions = mvc.perform(
-                get("/cities/" + city.getId())
+                get("/cities/" + randomCity.getId())
         );
 
         // then
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("id", is(city.getId()), Long.class))
-                .andExpect(jsonPath("name", is(city.getName())))
-                .andExpect(jsonPath("country.id", is(country.getId()), Long.class))
-                .andExpect(jsonPath("country.name", is(country.getName())));
+                .andExpect(jsonPath("id", is(randomCity.getId()), Long.class))
+                .andExpect(jsonPath("name", is(randomCity.getName())))
+                .andExpect(jsonPath("country.id", is(randomCountry.getId()), Long.class))
+                .andExpect(jsonPath("country.name", is(randomCountry.getName())));
     }
 }

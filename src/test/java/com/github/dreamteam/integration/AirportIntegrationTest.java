@@ -4,6 +4,7 @@ import com.github.dreamteam.integration.misc.DatabaseCleaner;
 import com.github.dreamteam.model.Airport;
 import com.github.dreamteam.model.City;
 import com.github.dreamteam.model.Country;
+import com.github.dreamteam.model.Hotel;
 import com.github.dreamteam.repository.AirportRepository;
 import com.github.dreamteam.repository.CityRepository;
 import com.github.dreamteam.repository.CountryRepository;
@@ -25,61 +26,32 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-public class AirportIntegrationTest {
 
-    @Autowired
-    private MockMvc mvc;
+public class AirportIntegrationTest extends AbstractTest{
 
-    @Autowired
-    private AirportRepository airportRepository;
-
-    @Autowired
-    private CityRepository cityRepository;
-
-    @Autowired
-    private CountryRepository countryRepository;
-    @Autowired
-    private DatabaseCleaner databaseCleaner;
-
-    @Before
-    public void setUp() {
-        databaseCleaner.clean();
-    }
 
     @Test
     public void get_airport_by_id() throws Exception {
         // given
-        Country country = new Country();
-        country.setName("Estonia");
-        country = countryRepository.save(country);
+        Country randomCountry = addCountryActionProvider.getObject().execute();
 
-        City city = new City();
-        city.setCountry(country);
-        city.setName("Tallinn");
-        city = cityRepository.save(city);
+        City randomCity = addCityActionProvider.getObject().setCountry(randomCountry).execute();
 
-        Airport airport = new Airport();
-        airport.setCity(city);
-        airport.setName("Tallinn lennujaam");
-        airport = airportRepository.save(airport);
+        Airport randomAirport = addAirportActionProvider.getObject().setCity(randomCity).execute();
 
         // when
         ResultActions resultActions = mvc.perform(
-                get("/airports/" + airport.getId())
+                get("/airports/" + randomAirport.getId())
         );
 
         // then
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("id", is(airport.getId()), Long.class))
-                .andExpect(jsonPath("name", is(airport.getName())))
-                .andExpect(jsonPath("city.id", is(city.getId()), Long.class))
-                .andExpect(jsonPath("city.name", is(city.getName())))
-                .andExpect(jsonPath("city.country.id", is(country.getId()), Long.class))
-                .andExpect(jsonPath("city.country.name", is(country.getName())));
+                .andExpect(jsonPath("id", is(randomAirport.getId()), Long.class))
+                .andExpect(jsonPath("name", is(randomAirport.getName())))
+                .andExpect(jsonPath("city.id", is(randomCity.getId()), Long.class))
+                .andExpect(jsonPath("city.name", is(randomCity.getName())))
+                .andExpect(jsonPath("city.country.id", is(randomCountry.getId()), Long.class))
+                .andExpect(jsonPath("city.country.name", is(randomCountry.getName())));
     }
 }
