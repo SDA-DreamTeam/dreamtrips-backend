@@ -1,5 +1,6 @@
 package com.github.dreamteam.integration;
 
+import com.github.dreamteam.integration.misc.DatabaseCleaner;
 import com.github.dreamteam.model.Airport;
 import com.github.dreamteam.model.City;
 import com.github.dreamteam.model.Country;
@@ -41,12 +42,12 @@ public class AirportIntegrationTest {
 
     @Autowired
     private CountryRepository countryRepository;
+    @Autowired
+    private DatabaseCleaner databaseCleaner;
 
     @Before
     public void setUp() {
-        airportRepository.deleteAll();
-        cityRepository.deleteAll();
-        countryRepository.deleteAll();
+        databaseCleaner.clean();
     }
 
     @Test
