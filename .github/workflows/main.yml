@@ -24,5 +24,11 @@ jobs:
       - name: Setup Maven
         uses: stCarolas/setup-maven@v4.1
 
+      - name: Setup docker
+        uses: docker-practice/actions-setup-docker@master
+
+      - name: Run database
+        run: docker run --name mysql-sda1 -d --rm -p 3306:3306 -e "MYSQL_ROOT_PASSWORD=mysql" -e "MYSQL_DATABASE=SDA" mysql:latest
+
       - name: Test
         run: mvn test
