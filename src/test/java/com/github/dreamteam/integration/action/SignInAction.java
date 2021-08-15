@@ -3,6 +3,8 @@ package com.github.dreamteam.integration.action;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.dreamteam.model.Country;
 import com.github.dreamteam.pojo.AddCountryRequest;
+import com.github.dreamteam.pojo.SignInRequest;
+import com.github.dreamteam.pojo.SignInResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -16,34 +18,35 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Component
-public class AddCountryAction {
+public class SignInAction {
 
     @Autowired
     private MockMvc mvc;
 
-    private String name = "Estonia";
-    private String token;
+    private String username;
+    private String password;
 
-    public AddCountryAction setName(String name) {
-        this.name = name;
+
+    public SignInAction setUsername(String username) {
+        this.username = username;
         return this;
     }
 
-    public AddCountryAction setToken(String token) {
-        this.token = token;
+    public SignInAction setPassword(String password) {
+        this.password = password;
         return this;
     }
 
-    public Country execute() throws Exception {
-        AddCountryRequest request = new AddCountryRequest()
-                .setName(name);
+    public SignInResponse execute() throws Exception {
+        SignInRequest request = new SignInRequest()
+                .setUsername(username)
+                .setPassword(password);
         MvcResult addCountryMvcResult = mvc.perform(
-                post("/countries").contentType(MediaType.APPLICATION_JSON)
+                post("/auth/sign-in").contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(request))
-                        .header("Authorization", "Bearer " + token)
         ).andExpect(status().isOk())
                 .andReturn();
-        return toObject(addCountryMvcResult.getResponse().getContentAsString(), Country.class);
+        return toObject(addCountryMvcResult.getResponse().getContentAsString(), SignInResponse.class);
     }
 
     private String asJsonString(final Object obj) {
