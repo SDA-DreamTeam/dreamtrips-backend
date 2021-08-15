@@ -25,7 +25,10 @@ public class Trip {
 
     private LocalDate departureDate;
     private int numberOfDays;
+
+    @Enumerated(EnumType.STRING)
     private BoardBasis type;
+
     private BigDecimal priceAdult;
     private BigDecimal priceChild;
     private int numberOfBedsAdult;
