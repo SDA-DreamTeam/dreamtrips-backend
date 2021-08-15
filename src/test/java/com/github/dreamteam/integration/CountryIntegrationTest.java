@@ -1,17 +1,9 @@
 package com.github.dreamteam.integration;
 
-import com.github.dreamteam.integration.misc.DatabaseCleaner;
 import com.github.dreamteam.model.Country;
-import com.github.dreamteam.repository.CountryRepository;
-import org.junit.Before;
+import com.github.dreamteam.model.User;
+import com.github.dreamteam.pojo.SignInResponse;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.hamcrest.Matchers.is;
@@ -20,14 +12,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-public class CountryIntegrationTest extends AbstractTest{
-
+public class CountryIntegrationTest extends AbstractTest {
 
 
     @Test
     public void get_country_by_id() throws Exception {
         // given
-        Country randomCountry = addCountryActionProvider.getObject().execute();
+        User admin = addUserActionProvider.getObject().setUsername("hakkliha").admin().execute();
+        SignInResponse session = signInActionProvider.getObject().setUsername(admin.getUsername()).setPassword(admin.getPassword()).execute();
+
+        Country randomCountry = addCountryActionProvider.getObject().setToken(session.getToken()).execute();
 
         // when
         ResultActions resultActions = mvc.perform(

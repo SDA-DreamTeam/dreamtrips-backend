@@ -37,6 +37,12 @@ public abstract class AbstractTest {
     protected  ObjectProvider<AddTripAction> addTripActionProvider;
 
     @Autowired
+    protected  ObjectProvider<AddUserAction> addUserActionProvider;
+
+    @Autowired
+    protected  ObjectProvider<SignInAction> signInActionProvider;
+
+    @Autowired
     private DatabaseCleaner databaseCleaner;
 
     @Before
