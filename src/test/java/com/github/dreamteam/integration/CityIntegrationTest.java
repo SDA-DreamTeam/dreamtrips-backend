@@ -1,21 +1,10 @@
 package com.github.dreamteam.integration;
 
-import com.github.dreamteam.integration.misc.DatabaseCleaner;
-import com.github.dreamteam.model.Airport;
 import com.github.dreamteam.model.City;
 import com.github.dreamteam.model.Country;
-import com.github.dreamteam.repository.AirportRepository;
-import com.github.dreamteam.repository.CityRepository;
-import com.github.dreamteam.repository.CountryRepository;
-import org.junit.Before;
+import com.github.dreamteam.model.User;
+import com.github.dreamteam.pojo.SignInResponse;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.hamcrest.Matchers.is;
@@ -29,8 +18,10 @@ public class CityIntegrationTest extends AbstractTest {
     @Test
     public void get_city_by_id() throws Exception {
         // given
-        Country randomCountry = addCountryActionProvider.getObject().execute();
+        User admin = addUserActionProvider.getObject().admin().execute();
+        SignInResponse session = signInActionProvider.getObject().setUser(admin).execute();
 
+        Country randomCountry = addCountryActionProvider.getObject().setSession(session).execute();
         City randomCity = addCityActionProvider.getObject().setCountry(randomCountry).execute();
 
         // when

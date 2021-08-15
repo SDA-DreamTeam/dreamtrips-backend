@@ -3,6 +3,7 @@ package com.github.dreamteam.integration.action;
 import com.github.dreamteam.model.User;
 import com.github.dreamteam.model.UserRole;
 import com.github.dreamteam.repository.UserRepository;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -17,7 +18,7 @@ public class AddUserAction {
     @Autowired
     private UserRepository userRepository;
 
-    private String username;
+    private String username = RandomStringUtils.randomAscii(10);
     private String password = "123";
     private UserRole role = UserRole.CUSTOMER;
 

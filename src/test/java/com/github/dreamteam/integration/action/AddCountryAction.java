@@ -1,8 +1,8 @@
 package com.github.dreamteam.integration.action;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.dreamteam.model.Country;
 import com.github.dreamteam.pojo.AddCountryRequest;
+import com.github.dreamteam.pojo.SignInResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import static com.github.dreamteam.integration.misc.JsonUtil.asJsonString;
+import static com.github.dreamteam.integration.misc.JsonUtil.toObject;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -34,6 +36,11 @@ public class AddCountryAction {
         return this;
     }
 
+    public AddCountryAction setSession(SignInResponse session) {
+        this.token = session.getToken();
+        return this;
+    }
+
     public Country execute() throws Exception {
         AddCountryRequest request = new AddCountryRequest()
                 .setName(name);
@@ -46,21 +53,7 @@ public class AddCountryAction {
         return toObject(addCountryMvcResult.getResponse().getContentAsString(), Country.class);
     }
 
-    private String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    private <T> T toObject(final String json, Class<T> result) {
-        try {
-            return new ObjectMapper().readValue(json, result);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 
 }

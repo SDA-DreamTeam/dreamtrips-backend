@@ -48,7 +48,6 @@ public class BearerAuthenticationFilter extends OncePerRequestFilter {
         }
         try {
             final String token = authorization.replace("Bearer ", "");
-            LoggerFactory.getLogger(getClass()).info("Bearer token " + token);
             Session session = sessionRepository.findById(token);
             if (session == null) {
                 throw new SessionAuthenticationException("No session found");

@@ -1,8 +1,6 @@
 package com.github.dreamteam.integration.action;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.dreamteam.model.Country;
-import com.github.dreamteam.pojo.AddCountryRequest;
+import com.github.dreamteam.model.User;
 import com.github.dreamteam.pojo.SignInRequest;
 import com.github.dreamteam.pojo.SignInResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import static com.github.dreamteam.integration.misc.JsonUtil.asJsonString;
+import static com.github.dreamteam.integration.misc.JsonUtil.toObject;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -26,6 +26,12 @@ public class SignInAction {
     private String username;
     private String password;
 
+
+    public SignInAction setUser(User user) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        return this;
+    }
 
     public SignInAction setUsername(String username) {
         this.username = username;
@@ -47,22 +53,6 @@ public class SignInAction {
         ).andExpect(status().isOk())
                 .andReturn();
         return toObject(addCountryMvcResult.getResponse().getContentAsString(), SignInResponse.class);
-    }
-
-    private String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private <T> T toObject(final String json, Class<T> result) {
-        try {
-            return new ObjectMapper().readValue(json, result);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
