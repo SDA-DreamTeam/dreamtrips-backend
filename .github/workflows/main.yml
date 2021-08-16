@@ -28,7 +28,7 @@ jobs:
         uses: docker-practice/actions-setup-docker@master
 
       - name: Run database
-        run: docker run --name mysql-sda1 -d --rm -p 3306:3306 -e "MYSQL_ROOT_PASSWORD=mysql" -e "MYSQL_DATABASE=SDA" mysql:latest
+        run: docker run --name mysql-sda1 -d --rm -p 3306:3306 -e "MYSQL_ROOT_PASSWORD=mysql" -e "MYSQL_DATABASE=SDA" -e "MYSQL_DATABASE=dreamtrips" mysql:latest
 
       - name: Test
         run: mvn test
