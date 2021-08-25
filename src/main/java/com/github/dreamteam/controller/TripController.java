@@ -7,10 +7,11 @@ import com.github.dreamteam.pojo.AddAirportRequest;
 import com.github.dreamteam.pojo.AddTripRequest;
 import com.github.dreamteam.pojo.FindTripRequest;
 import com.github.dreamteam.service.hotel.HotelService;
-import com.github.dreamteam.service.trip.TripService;
+import com.github.dreamteam.service.trip.TripServiceImpl;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -19,16 +20,17 @@ import java.util.List;
 @RequestMapping("/trips")
 public class TripController {
     @Autowired
-    private TripService tripService;
+    private TripServiceImpl tripService;
 
     @GetMapping
-    public @ResponseBody
-    List<Trip> getAllTrips(){
-        return tripService.getAllTrips();
+    @ResponseBody
+    public Page<Trip> getAllTrips(FindTripRequest request) {
+        return tripService.getAllTrips(request);
     }
 
     @GetMapping("/{idCode}")
-    public @ResponseBody Trip getTripById(@PathVariable("idCode") long idCode) throws ObjectNotFoundException {
+    public @ResponseBody
+    Trip getTripById(@PathVariable("idCode") long idCode) throws ObjectNotFoundException {
         return tripService.getTripById(idCode);
     }
 

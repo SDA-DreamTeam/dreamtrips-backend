@@ -19,12 +19,13 @@ public class CityController {
 
     @GetMapping
     @ResponseBody
-    public List<City> getAllCities(){
+    public List<City> getAllCities() {
         return cityService.getAllCities();
     }
 
     @GetMapping("/{idCode}")
-    public @ResponseBody City getCityById(@PathVariable("idCode") long idCode) throws ObjectNotFoundException {
+    @ResponseBody
+    public City getCityById(@PathVariable("idCode") long idCode) throws ObjectNotFoundException {
         return cityService.getCityById(idCode);
     }
 

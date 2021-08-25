@@ -20,9 +20,11 @@ public class HotelIntegrationTest extends AbstractTest {
     @Test
     public void get_hotel_by_id() throws Exception {
         // given
-        Country randomCountry = addCountryActionProvider.getObject().execute();
+        User admin = addUserActionProvider.getObject().execute();
+        SignInResponse session = signInActionProvider.getObject().setUser(admin).execute();
 
-        City randomCity = addCityActionProvider.getObject().setCountry(randomCountry).execute();
+        Country randomCountry = addCountryActionProvider.getObject().setSession(session).execute();
+        City randomCity = addCityActionProvider.getObject().setSession(session).setCountry(randomCountry).execute();
 
         Hotel randomHotel = addHotelActionProvider.getObject().setSession(session).setCity(randomCity).execute();
 
