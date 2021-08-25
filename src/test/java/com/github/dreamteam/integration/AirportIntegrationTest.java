@@ -1,10 +1,8 @@
 package com.github.dreamteam.integration;
 
 import com.github.dreamteam.integration.misc.DatabaseCleaner;
-import com.github.dreamteam.model.Airport;
-import com.github.dreamteam.model.City;
-import com.github.dreamteam.model.Country;
-import com.github.dreamteam.model.Hotel;
+import com.github.dreamteam.model.*;
+import com.github.dreamteam.pojo.SignInResponse;
 import com.github.dreamteam.repository.AirportRepository;
 import com.github.dreamteam.repository.CityRepository;
 import com.github.dreamteam.repository.CountryRepository;
@@ -33,11 +31,13 @@ public class AirportIntegrationTest extends AbstractTest{
     @Test
     public void get_airport_by_id() throws Exception {
         // given
-        Country randomCountry = addCountryActionProvider.getObject().execute();
+        User admin = addUserActionProvider.getObject().execute();
+        SignInResponse session = signInActionProvider.getObject().setUser(admin).execute();
 
-        City randomCity = addCityActionProvider.getObject().setCountry(randomCountry).execute();
+        Country randomCountry = addCountryActionProvider.getObject().setSession(session).execute();
+        City randomCity = addCityActionProvider.getObject().setSession(session).setCountry(randomCountry).execute();
 
-        Airport randomAirport = addAirportActionProvider.getObject().setCity(randomCity).execute();
+        Airport randomAirport = addAirportActionProvider.getObject().setSession(session).setCityId(randomCity.getId()).execute();
 
         // when
         ResultActions resultActions = mvc.perform(

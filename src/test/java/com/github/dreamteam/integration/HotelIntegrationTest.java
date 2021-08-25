@@ -3,9 +3,9 @@ package com.github.dreamteam.integration;
 import com.github.dreamteam.model.City;
 import com.github.dreamteam.model.Country;
 import com.github.dreamteam.model.Hotel;
-import com.github.dreamteam.repository.HotelRepository;
+import com.github.dreamteam.model.User;
+import com.github.dreamteam.pojo.SignInResponse;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.hamcrest.Matchers.is;
@@ -24,7 +24,7 @@ public class HotelIntegrationTest extends AbstractTest {
 
         City randomCity = addCityActionProvider.getObject().setCountry(randomCountry).execute();
 
-        Hotel randomHotel = addHotelActionProvider.getObject().setCity(randomCity).execute();
+        Hotel randomHotel = addHotelActionProvider.getObject().setSession(session).setCity(randomCity).execute();
 
         // when
         ResultActions resultActions = mvc.perform(

@@ -18,7 +18,7 @@ public class CountryIntegrationTest extends AbstractTest {
     @Test
     public void get_country_by_id() throws Exception {
         // given
-        User admin = addUserActionProvider.getObject().admin().execute();
+        User admin = addUserActionProvider.getObject().execute();
         SignInResponse session = signInActionProvider.getObject().setUser(admin).execute();
 
         Country randomCountry = addCountryActionProvider.getObject().setSession(session).execute();

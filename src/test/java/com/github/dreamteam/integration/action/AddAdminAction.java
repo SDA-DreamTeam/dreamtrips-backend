@@ -13,29 +13,25 @@ import java.util.Objects;
 
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Component
-public class AddUserAction {
+public class AddAdminAction {
 
     @Autowired
     private UserRepository userRepository;
 
     private String username = RandomStringUtils.randomAscii(10);
     private String password = "123";
-    private UserRole role = UserRole.CUSTOMER;
+    private UserRole role = UserRole.ADMIN;
 
-    public AddUserAction setUsername(String username) {
+    public AddAdminAction setUsername(String username) {
         this.username = username;
         return this;
     }
 
-    public AddUserAction setPassword(String password) {
+    public AddAdminAction setPassword(String password) {
         this.password = password;
         return this;
     }
 
-    public AddUserAction admin() {
-        this.role = UserRole.ADMIN;
-        return this;
-    }
 
     public User execute() {
         User user = new User();

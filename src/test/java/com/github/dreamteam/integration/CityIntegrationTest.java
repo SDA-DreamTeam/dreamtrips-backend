@@ -18,11 +18,11 @@ public class CityIntegrationTest extends AbstractTest {
     @Test
     public void get_city_by_id() throws Exception {
         // given
-        User admin = addUserActionProvider.getObject().admin().execute();
+        User admin = addUserActionProvider.getObject().execute();
         SignInResponse session = signInActionProvider.getObject().setUser(admin).execute();
 
         Country randomCountry = addCountryActionProvider.getObject().setSession(session).execute();
-        City randomCity = addCityActionProvider.getObject().setCountry(randomCountry).execute();
+        City randomCity = addCityActionProvider.getObject().setSession(session).setCountry(randomCountry).execute();
 
         // when
         ResultActions resultActions = mvc.perform(
