@@ -17,6 +17,17 @@ public class User {
 
     private String password;
 
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public User setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
     public long getId() {
         return id;
     }

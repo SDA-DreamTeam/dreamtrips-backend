@@ -1,6 +1,7 @@
 package com.github.dreamteam.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "purchase")
@@ -9,7 +10,7 @@ public class Purchase {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
     private String participantsDetails;
-    private double amount;
+    private BigDecimal amount;
 
     @OneToOne
     @JoinColumn(name="TRIP_ID", nullable=false, updatable=false)
@@ -32,11 +33,11 @@ public class Purchase {
         this.participantsDetails = participantsDetails;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
