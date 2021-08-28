@@ -73,6 +73,6 @@ public class TripServiceImpl {
     }
 
     public Page<Trip> suggestions() {
-        return tripRepository.findAll(PageRequest.of(1, 10));
+        return tripRepository.findAll(PageRequest.of(0, 10));
     }
 }
