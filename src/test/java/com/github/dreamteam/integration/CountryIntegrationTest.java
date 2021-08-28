@@ -34,4 +34,20 @@ public class CountryIntegrationTest extends AbstractTest {
                 .andExpect(jsonPath("id", is(randomCountry.getId()), Long.class))
                 .andExpect(jsonPath("name", is(randomCountry.getName())));
     }
+
+    @Test
+    public void prevent_duplicates() throws Exception {
+        // given
+        User admin = addUserActionProvider.getObject().execute();
+        SignInResponse session = signInActionProvider.getObject().setUser(admin).execute();
+
+        addCountryActionProvider.getObject().setName("Estonia").setSession(session).execute();
+
+        // when
+        ResultActions resultActions = addCountryActionProvider.getObject().setName("Estonia").setSession(session).executeApi();
+
+        // then
+        resultActions
+                .andExpect(status().is4xxClientError());
+    }
 }

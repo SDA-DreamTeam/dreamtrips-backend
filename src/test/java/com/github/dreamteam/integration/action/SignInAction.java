@@ -48,7 +48,7 @@ public class SignInAction {
                 .setUsername(username)
                 .setPassword(password);
         MvcResult addCountryMvcResult = mvc.perform(
-                post("/auth/sign-in").contentType(MediaType.APPLICATION_JSON)
+                post("/sign-in").contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(request))
         ).andExpect(status().isOk())
                 .andReturn();

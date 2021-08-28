@@ -40,7 +40,7 @@ public abstract class AbstractTest {
     protected  ObjectProvider<AddAdminAction> addUserActionProvider;
 
     @Autowired
-    protected ObjectProvider<AddPurchaseAction> addPurchaseActionProvider;
+    protected ObjectProvider<AddBookingAction> addBookingActionProvider;
 
     @Autowired
     protected  ObjectProvider<SignInAction> signInActionProvider;
@@ -52,11 +52,14 @@ public abstract class AbstractTest {
     protected  ObjectProvider<AddCustomerAction> addCustomerActionProvider;
 
     @Autowired
+    protected  ObjectProvider<ListBookingAction> listBookingActionProvider;
+
+    @Autowired
     private DatabaseCleaner databaseCleaner;
 
     @Before
     public void setUp() {
-        databaseCleaner.clean();
+//        databaseCleaner.clean();
     }
 
 }

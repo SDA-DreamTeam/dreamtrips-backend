@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
                 sessionRepository,
                 userRepository
         );
-        http.authorizeRequests()
+        http.cors().and().authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/countries").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/countries").permitAll()
                 .antMatchers(HttpMethod.POST, "/cities").hasRole("ADMIN")
@@ -58,8 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
                 .antMatchers(HttpMethod.GET, "/hotels").permitAll()
                 .antMatchers(HttpMethod.POST, "/trips").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/trips").permitAll()
-                .antMatchers(HttpMethod.POST, "/purchases").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/purchases").permitAll()
+                .antMatchers(HttpMethod.POST, "/bookings").permitAll()
+                .antMatchers(HttpMethod.GET, "/bookings").permitAll()
                 .antMatchers("/registration").permitAll()
 
                 .antMatchers("/sign-in").permitAll()

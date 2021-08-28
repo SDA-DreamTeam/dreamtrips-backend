@@ -10,9 +10,11 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.dreamteam.integration.misc.JsonUtil.asJsonString;
 import static com.github.dreamteam.integration.misc.JsonUtil.toObject;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -42,17 +44,20 @@ public class AddCountryAction {
     }
 
     public Country execute() throws Exception {
-        AddCountryRequest request = new AddCountryRequest()
-                .setName(name);
-        MvcResult addCountryMvcResult = mvc.perform(
-                post("/countries").contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(request))
-                        .header("Authorization", "Bearer " + token)
-        ).andExpect(status().isOk())
+        MvcResult addCountryMvcResult = executeApi().andExpect(status().isOk())
                 .andReturn();
         return toObject(addCountryMvcResult.getResponse().getContentAsString(), Country.class);
     }
 
+    public ResultActions executeApi() throws Exception {
+        AddCountryRequest request = new AddCountryRequest()
+                .setName(name);
+        return mvc.perform(
+                post("/countries").contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(request))
+                        .header("Authorization", "Bearer " + token)
+        );
+    }
 
 
 

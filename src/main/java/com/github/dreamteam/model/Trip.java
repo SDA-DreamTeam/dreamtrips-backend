@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "trip")
 public class Trip {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

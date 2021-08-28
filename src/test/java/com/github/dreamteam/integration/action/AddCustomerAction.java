@@ -1,8 +1,5 @@
 package com.github.dreamteam.integration.action;
 
-import com.github.dreamteam.model.Purchase;
-import com.github.dreamteam.model.User;
-import com.github.dreamteam.model.UserRole;
 import com.github.dreamteam.pojo.RegistrationRequest;
 import com.github.dreamteam.pojo.SignInResponse;
 import com.github.dreamteam.repository.UserRepository;
@@ -14,8 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import java.util.Objects;
 
 import static com.github.dreamteam.integration.misc.JsonUtil.asJsonString;
 import static com.github.dreamteam.integration.misc.JsonUtil.toObject;

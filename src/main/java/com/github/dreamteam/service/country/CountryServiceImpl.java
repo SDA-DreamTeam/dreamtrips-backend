@@ -21,6 +21,7 @@ public class CountryServiceImpl implements CountryService {
                 .orElseThrow(() -> new NotFoundException("Unable to find such country " + countryId));
     }
 
+
     @Override
     public List<Country> getAllCountries() {
         return countryRepository.findAll();
@@ -28,6 +29,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country save(AddCountryRequest request) {
+
         Country country = new Country();
         country.setName(request.getName());
         return countryRepository.save(country);
