@@ -93,7 +93,7 @@ public class TripIntegrationTest extends AbstractTest {
                 .execute();
 
         // then
-        Assert.assertEquals(1, page.getSize());
+        Assert.assertEquals(1, page.getTotalElements());
     }
 
 }

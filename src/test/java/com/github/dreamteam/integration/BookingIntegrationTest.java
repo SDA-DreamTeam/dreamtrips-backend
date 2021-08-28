@@ -2,6 +2,7 @@ package com.github.dreamteam.integration;
 
 import com.github.dreamteam.model.*;
 import com.github.dreamteam.pojo.SignInResponse;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.test.web.servlet.ResultActions;
@@ -13,6 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class BookingIntegrationTest extends AbstractTest {
 
+    @Ignore
     @Test
     public void book_trip() throws Exception {
         User admin = addUserActionProvider.getObject().execute();

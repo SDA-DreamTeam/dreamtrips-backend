@@ -1,5 +1,6 @@
 package com.github.dreamteam.service.country;
 
+import com.github.dreamteam.exception.BadRequestException;
 import com.github.dreamteam.exception.NotFoundException;
 import com.github.dreamteam.model.Country;
 import com.github.dreamteam.pojo.AddCountryRequest;
@@ -27,9 +28,12 @@ public class CountryServiceImpl implements CountryService {
         return countryRepository.findAll();
     }
 
+
     @Override
     public Country save(AddCountryRequest request) {
-
+        if (countryRepository.findByName(request.getName()).isPresent()){
+            throw new BadRequestException();
+        }
         Country country = new Country();
         country.setName(request.getName());
         return countryRepository.save(country);

@@ -59,7 +59,7 @@ public abstract class AbstractTest {
 
     @Before
     public void setUp() {
-//        databaseCleaner.clean();
+        databaseCleaner.clean();
     }
 
 }
