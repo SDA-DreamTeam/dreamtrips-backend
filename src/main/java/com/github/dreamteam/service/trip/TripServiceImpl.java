@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class TripServiceImpl {
@@ -42,8 +41,10 @@ public class TripServiceImpl {
     }
 
     public Page<Trip> getAllTrips(FindTripRequest request) {
-        long fromAirportId = request.getFromAirportId();
-        long toAirportId = request.getToAirportId();
+        Long fromAirportId = request.getFromAirportId();
+        Long toAirportId = request.getToAirportId();
+        Long fromCountryId = request.getFromCountryId();
+        Long toCountryId = request.getToCountryId();
         Long hotelId = request.getHotelId();
         LocalDate departureDate = request.getDepartureDate();
         Integer numberOfDays = request.getNumberOfDays();
@@ -52,8 +53,21 @@ public class TripServiceImpl {
         BigDecimal priceChild = request.getPriceChild();
         Integer numberOfBedsAdult = request.getNumberOfBedsAdult();
         Integer numberOfBedsChild = request.getNumberOfBedsChild();
-        return tripRepositoryCustom.findAll(fromAirportId, toAirportId, hotelId, departureDate, numberOfDays, type,
-                priceAdult, priceChild, numberOfBedsAdult, numberOfBedsChild);
+        return tripRepositoryCustom.findAll(
+                fromCountryId,
+                fromAirportId,
+                toCountryId,
+                toAirportId,
+                hotelId,
+                departureDate,
+                numberOfDays,
+                type,
+                priceAdult,
+                priceChild,
+                numberOfBedsAdult,
+                numberOfBedsChild,
+                PageRequest.of(request.getPage(), request.getSize())
+        );
     }
 
     @Transactional
